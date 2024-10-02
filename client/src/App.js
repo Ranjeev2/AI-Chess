@@ -9,7 +9,7 @@ function App() {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const res = await axios.get('http://localhost:5000/api/current_user', { withCredentials: true });
+        const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/current_user`, { withCredentials: true });
         setUser(res.data);
       } catch (err) {
         console.error('Error fetching user:', err);
