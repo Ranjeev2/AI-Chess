@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Chess Game</title>
+    <!-- Include Chessboard.js CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/chessboardjs@1.0.0/dist/chessboard-1.0.0.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+        }
+        #board {
+            width: 400px;
+            margin: 20px auto;
+        }
+        #status {
+            margin: 10px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>AI Chess Game</h1>
+    <div id="board" style="width: 400px; height: 400px;"></div> <!-- Ensure width is applied here -->
+    <div id="status">Status: Ready</div>
+    <button id="aiMoveBtn">AI Move</button>
+
+    <!-- Include Chessboard.js -->
+    <script src="https://unpkg.com/chessboardjs@1.0.0/dist/chessboard-1.0.0.min.js"></script>
+    <!-- Include Chess.js for chess logic -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.3/chess.min.js"></script>
+    
+    <script>
+        // Initialize the chessboard
+        const board = Chessboard('board', {
+            draggable: true,
+            dropOffBoard: 'trash',
+            position: 'start'
+        });
+
+        // Initialize chess game logic
+        const game = new Chess();
+        const statusElement = document.getElementById('status');
+
+        // Update the status display
+        function updateStatus() {
+            if (game.in_checkmate()) {
+                statusElement.textContent = 'Game over, checkmate!';
+            } else if (game.in_draw()) {
+                statusElement.textContent = 'Game over, draw!';
+            } else {
+                const moveColor = game.turn() === 'w' ? 'White' : 'Black';
+                statusElement.textContent = 'Status: ' + moveColor + "'s move";
+            }
+        }
+
+        // AI move function (random move for now)
+        function aiMove() {
+            const possibleMoves = game.ugly_moves();
+            if (possibleMoves.length === 0) return; // No more moves available
+
+            const randomIndex = Math.floor(Math.random() * possibleMoves.length);
+            game.ugly_move(possibleMoves[randomIndex]);
+            board.position(game.fen()); // Update the board position
+            updateStatus(); // Update game status
+        }
+
+        // Handle AI move button click
+        document.getElementById('aiMoveBtn').addEventListener('click', aiMove);
+
+        // Initial status update
+        updateStatus();
+    </script>
+
+</body>
+</html>
