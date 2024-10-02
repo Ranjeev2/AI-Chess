@@ -3,12 +3,14 @@ import axios from 'axios';
 
 const GoogleAuth = () => {
   const handleLogin = () => {
-    window.location = 'http://localhost:5000/auth/google';
+    // Update to use port 3000
+    window.location = 'http://localhost:3000/auth/google';
   };
 
   const handleLogout = async () => {
     try {
-      await axios.get('http://localhost:5000/auth/logout', { withCredentials: true });
+      // Update to use port 3000
+      await axios.get('http://localhost:3000/auth/logout', { withCredentials: true });
       window.location.href = 'http://localhost:3000';
     } catch (err) {
       console.error('Error logging out:', err);
