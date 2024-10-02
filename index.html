@@ -22,13 +22,21 @@
             font-size: 18px;
         }
     </style>
+    <!-- Include Google API Client -->
+    <script src="https://apis.google.com/js/api:client.js"></script>
 </head>
 <body>
 
     <h1>AI Chess Game</h1>
-    <div id="board" style="width: 400px; height: 400px;"></div> <!-- Ensure width is applied here -->
+    <div id="board" style="width: 400px; height: 400px;"></div>
     <div id="status">Status: Ready</div>
     <button id="aiMoveBtn">AI Move</button>
+
+    <!-- Login/Logout buttons -->
+    <div id="auth-buttons">
+        <button id="loginBtn">Login with Google</button>
+        <button id="logoutBtn">Logout</button>
+    </div>
 
     <!-- Include Chessboard.js -->
     <script src="https://unpkg.com/chessboardjs@1.0.0/dist/chessboard-1.0.0.min.js"></script>
@@ -36,6 +44,44 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.3/chess.min.js"></script>
     
     <script>
+        // Initialize Google OAuth client
+        let GoogleAuth;
+        const CLIENT_ID = 'YOUR_CLIENT_ID.apps.googleusercontent.com'; // Replace with your client ID
+
+        function initClient() {
+            gapi.load('client:auth2', function() {
+                gapi.auth2.init({
+                    client_id: CLIENT_ID,
+                    scope: 'profile email'
+                }).then(() => {
+                    GoogleAuth = gapi.auth2.getAuthInstance();
+                    updateUI(); // Update UI based on login status
+                });
+            });
+        }
+
+        function updateUI() {
+            const isSignedIn = GoogleAuth.isSignedIn.get();
+            document.getElementById('auth-buttons').style.display = isSignedIn ? 'none' : 'block';
+            document.getElementById('logoutBtn').style.display = isSignedIn ? 'block' : 'none';
+        }
+
+        function login() {
+            GoogleAuth.signIn().then(() => {
+                updateUI();
+                const profile = GoogleAuth.currentUser.get().getBasicProfile();
+                console.log('User signed in:', profile.getName());
+                // Here, you can send the user info to your server if needed
+            });
+        }
+
+        function logout() {
+            GoogleAuth.signOut().then(() => {
+                updateUI();
+                console.log('User signed out');
+            });
+        }
+
         // Initialize the chessboard
         const board = Chessboard('board', {
             draggable: true,
@@ -72,9 +118,14 @@
 
         // Handle AI move button click
         document.getElementById('aiMoveBtn').addEventListener('click', aiMove);
+        document.getElementById('loginBtn').addEventListener('click', login);
+        document.getElementById('logoutBtn').addEventListener('click', logout);
 
         // Initial status update
         updateStatus();
+        // Initialize Google OAuth when the page loads
+        window.onload = initClient;
+
     </script>
 
 </body>
