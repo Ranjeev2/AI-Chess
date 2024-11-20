@@ -1,10 +1,10 @@
 import React from 'react';
-import Navbar from '../Navbar/Navbar';
+// import Navbar from '../Navbar/Navbar';
 
 const Home = ({ user, onLogout }) => {
   return (
 <div className="min-h-screen bg-gradient-to-br from-gray-900 to-gray-700 text-gray-200">
-  <Navbar user={user} onLogout={onLogout} />
+  {/* <Navbar user={user} onLogout={onLogout} /> */}
   <div className="w-full px-8 py-12 mx-auto"> {/* Adjusted padding */}
     <div className="text-center space-y-6">
       <h1 className="text-4xl font-bold text-white">Welcome to Chess AI</h1>

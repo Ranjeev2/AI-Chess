@@ -50,8 +50,11 @@
 // export default App;
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'; // Import necessary routing components
+import Navbar from './components/Navbar/Navbar'; // Import Navbar component
 import GoogleAuth from './components/OAuth/GoogleAuth';
 import Home from './components/Home/home';
+import Profile from './components/Profile/Profile'; // Import Profile component
 
 function App() {
   const [user, setUser] = useState(null);
@@ -79,21 +82,29 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-200 py-8 flex flex-col justify-center sm:py-0">
-      {user ? (
-        <Home user={user} onLogout={handleLogout} />
-      ) : (
-        <div className="relative py-3 sm:max-w-xl sm:mx-auto">
-          <div className="absolute inset-0 bg-gradient-to-r from-cyan-400 to-light-blue-500 shadow-lg transform -skew-y-6 sm:skew-y-0 sm:-rotate-6 sm:rounded-3xl"></div>
-          <div className="relative px-4 py-10 bg-white shadow-lg sm:rounded-3xl sm:p-20">
-            <div className="max-w-md mx-auto">
-              <h1 className="text-2xl font-semibold text-center">Chess AI</h1>
-              <GoogleAuth />
+    <Router>
+      <div className="min-h-screen bg-gray-200 py-8 flex flex-col justify-center sm:py-0">
+        {user ? (
+          <>
+            <Navbar user={user} onLogout={handleLogout} /> {/* Navbar only renders for authenticated users */}
+            <Routes>
+              <Route path="/" element={<Home user={user} onLogout={handleLogout} />} />
+              <Route path="/profile" element={<Profile user={user} />} />
+            </Routes>
+          </>
+        ) : (
+          <div className="relative py-3 sm:max-w-xl sm:mx-auto">
+            <div className="absolute inset-0 bg-gradient-to-r from-cyan-400 to-light-blue-500 shadow-lg transform -skew-y-6 sm:skew-y-0 sm:-rotate-6 sm:rounded-3xl"></div>
+            <div className="relative px-4 py-10 bg-white shadow-lg sm:rounded-3xl sm:p-20">
+              <div className="max-w-md mx-auto">
+                <h1 className="text-2xl font-semibold text-center">Chess AI</h1>
+                <GoogleAuth />
+              </div>
             </div>
           </div>
-        </div>
-      )}
-    </div>
+        )}
+      </div>
+    </Router>
   );
 }
 
