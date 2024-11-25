@@ -48,13 +48,15 @@
 // }
 
 // export default App;
+
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'; // Import necessary routing components
-import Navbar from './components/Navbar/Navbar'; // Import Navbar component
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Navbar from './components/Navbar/Navbar';
 import GoogleAuth from './components/OAuth/GoogleAuth';
 import Home from './components/Home/home';
-import Profile from './components/Profile/Profile'; // Import Profile component
+import Profile from './components/Profile/Profile';
+import ChessGame from './components/ChessAI/ChessGame'; // Add this import
 
 function App() {
   const [user, setUser] = useState(null);
@@ -86,10 +88,11 @@ function App() {
       <div className="min-h-screen bg-gray-200 py-8 flex flex-col justify-center sm:py-0">
         {user ? (
           <>
-            <Navbar user={user} onLogout={handleLogout} /> {/* Navbar only renders for authenticated users */}
+            <Navbar user={user} onLogout={handleLogout} />
             <Routes>
               <Route path="/" element={<Home user={user} onLogout={handleLogout} />} />
               <Route path="/profile" element={<Profile user={user} />} />
+              <Route path="/play" element={<ChessGame user={user} />} /> {/* Add this route */}
             </Routes>
           </>
         ) : (
