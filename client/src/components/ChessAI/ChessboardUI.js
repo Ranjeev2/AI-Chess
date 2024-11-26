@@ -6,6 +6,7 @@ const ChessboardUI = ({
   onDrop, 
   gameOver, 
   isThinking,
+  capturedPieces,
   orientation = 'white',
 }) => {
   const columns = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
@@ -16,6 +17,29 @@ const ChessboardUI = ({
       {children}
     </div>
   );
+
+  const CapturedPieces = ({ pieces, color }) => (
+    <div className={`flex flex-wrap gap-1 p-2 bg-gray-700 rounded-md ${color === 'w' ? 'mt-4' : 'mb-4'}`}>
+      {pieces.map((piece, index) => (
+        <div key={index} className="w-8 h-8 flex items-center justify-center">
+          {renderPiece(piece, color)}
+        </div>
+      ))}
+    </div>
+  );
+
+  const renderPiece = (piece, color) => {
+    const pieceSymbols = {
+      p: '♙', n: '♘', b: '♗', r: '♖', q: '♕', k: '♔',
+      P: '♟', N: '♞', B: '♝', R: '♜', Q: '♛', K: '♚'
+    };
+    const pieceSymbol = color === 'w' ? pieceSymbols[piece.toLowerCase()] : pieceSymbols[piece.toUpperCase()];
+    return (
+      <span className={`text-2xl ${color === 'w' ? 'text-white' : 'text-black'}`}>
+        {pieceSymbol}
+      </span>
+    );
+  };
 
   const boardWidth = 640; 
   const squareSize = boardWidth / 8;
@@ -33,6 +57,8 @@ const ChessboardUI = ({
             </div>
           </div>
         )}
+
+        <CapturedPieces pieces={capturedPieces.b} color="b" />
 
         <div className="relative flex flex-col">
           {/* Top coordinates */}
@@ -98,6 +124,8 @@ const ChessboardUI = ({
             <div className="w-10"/> 
           </div>
         </div>
+
+        <CapturedPieces pieces={capturedPieces.w} color="w" />
       </div>
     </div>
   );
