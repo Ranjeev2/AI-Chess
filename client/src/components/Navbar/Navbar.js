@@ -16,10 +16,10 @@ const Navbar = ({ user, onLogout }) => {
   return (
     <nav className="bg-gray-800 text-white shadow-md">
       <div className="container mx-auto px-4 py-4 flex justify-between items-center">
-        {/* Logo */}
+        {/* Logo section */}
         <div className="flex items-center space-x-3">
-          <Link to="/" className="flex items-center space-x-3"> {/* Redirect to home */}
-            <img src={icon} alt="Chess Icon" className="h-14 w-14 rounded-full" /> {/* Increased icon size */}
+          <Link to="/" className="flex items-center space-x-3">
+            <img src={icon} alt="Chess Icon" className="h-14 w-14 rounded-full" />
             <h1 className="text-2xl font-bold">Chess AI</h1>
           </Link>
         </div>
@@ -37,11 +37,7 @@ const Navbar = ({ user, onLogout }) => {
               viewBox="0 0 20 20"
               fill="currentColor"
             >
-              {/* <path
-                fillRule="evenodd"
-                // d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                clipRule="evenodd"
-              /> */}
+              {/* SVG path commented out */}
             </svg>
           </button>
 
@@ -49,7 +45,7 @@ const Navbar = ({ user, onLogout }) => {
           {dropdownOpen && (
             <div
               className="absolute right-0 mt-2 w-48 bg-white text-gray-800 rounded-lg shadow-lg z-50"
-              onMouseLeave={closeDropdown} // Close dropdown on mouse leave
+              onMouseLeave={closeDropdown}
             >
               <Link
                 to="/profile"
