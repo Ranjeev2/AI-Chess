@@ -53,7 +53,7 @@ const sendDailyChallenge = async (challenge) => {
 };
 
 const scheduleDailyChallenges = () => {
-  cron.schedule('0 9 * * *', async () => {
+  cron.schedule('58 16 * * *', async () => {
     try {
       const challenge = await Challenge.findOne().sort({ createdAt: -1 });
       if (challenge) {

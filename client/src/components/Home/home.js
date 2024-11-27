@@ -71,11 +71,11 @@ const Home = ({ user, onLogout }) => {
                 <div className="px-6 py-8">
                   <h2 className="text-3xl font-bold text-center mb-6">Daily Chess Challenges</h2>
                   <p className="text-center mb-8">
-                    Subscribe to receive daily chess puzzles and improve your skills!
+                    Subscribe to receive Weekly chess puzzles and improve your skills!
                   </p>
                   {isSubscribed ? (
                     <div className="text-center">
-                      <p className="text-green-400 mb-4">You're subscribed to daily challenges!</p>
+                      <p className="text-green-400 mb-4">You're subscribed to Weekly challenges!</p>
                       <button
                         onClick={handleUnsubscribe}
                         className="inline-flex items-center px-6 py-3 bg-red-600 hover:bg-red-700 text-white font-medium rounded-full transition duration-300 ease-in-out transform hover:-translate-y-1"
@@ -99,7 +99,7 @@ const Home = ({ user, onLogout }) => {
                         className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-green-500 to-blue-600 text-white font-medium rounded-full hover:from-green-600 hover:to-blue-700 transition duration-300 ease-in-out transform hover:-translate-y-1"
                       >
                         <Bell className="mr-2" size={20} />
-                        Subscribe to Daily Challenges
+                        Subscribe to Weekly Challenges
                       </button>
                     </form>
                   )}
@@ -108,12 +108,6 @@ const Home = ({ user, onLogout }) => {
             </div>
 
             <div className="mt-8 text-center">
-              <Link
-                to="/daily-challenge"
-                className="inline-block px-6 py-3 bg-yellow-500 text-black font-bold rounded-full hover:bg-yellow-400 transition duration-300"
-              >
-                Play Today's Challenge
-              </Link>
             </div>
 
             <div className="mt-16">

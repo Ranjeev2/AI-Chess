@@ -277,7 +277,7 @@ import GoogleAuth from './components/OAuth/GoogleAuth';
 import Home from './components/Home/home';
 import Profile from './components/Profile/Profile';
 import ChessGame from './components/ChessAI/ChessGame';
-import DailyChallenge from './components/ChessAI/DailyChallenge';
+// import DailyChallenge from './components/ChessAI/DailyChallenge';
 import NewsletterPage from './components/Newsletter/Newsletter';
 
 const darkTheme = createTheme({
@@ -324,7 +324,7 @@ function App() {
                   <Route path="/" element={<Home user={user} onLogout={handleLogout} />} />
                   <Route path="/profile" element={<Profile user={user} />} />
                   <Route path="/play" element={<ChessGame user={user} />} />
-                  <Route path="/daily-challenge" element={<DailyChallenge />} />
+                  {/* <Route path="/daily-challenge" element={<DailyChallenge />} /> */}
                   <Route path="/newsletter" element={<NewsletterPage />} />
                   <Route path="*" element={<Navigate to="/" replace />} />
                 </Routes>

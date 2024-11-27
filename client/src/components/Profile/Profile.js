@@ -96,7 +96,7 @@ const Profile = ({ user }) => {
                 <Box sx={{ position: 'relative', display: 'inline-block', mb: 3 }}>
                   <Box 
                     component="img"
-                    src={require("D:/testing1/AI-Chess/client/src/components/Assets/avatar.png")}
+                    src={require("../Assets/avatar.png")}
                     alt="Profile"
                     sx={{
                       width: 128,

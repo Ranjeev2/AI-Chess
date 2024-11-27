@@ -207,8 +207,8 @@ const cors = require('cors');
 const passport = require('passport');
 const session = require('express-session');
 const gameRoutes = require('./routes/gameRoutes');
-const { scheduleDailyChallenges, sendTestEmail } = require('./services/emailService');
-const challengeRoutes = require('./routes/challengeRoutes');
+// const { scheduleDailyChallenges, sendTestEmail } = require('./services/emailService');
+// const challengeRoutes = require('./routes/challengeRoutes');
 const newsletterRoutes = require('./routes/newsletterRoutes');
 
 require('./config/passport');
@@ -241,7 +241,7 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 app.use('/api/game', gameRoutes);
-app.use('/api/challenges', challengeRoutes);
+// app.use('/api/challenges', challengeRoutes);
 app.use('/api/newsletter', newsletterRoutes);
 
 // Connect to MongoDB 
@@ -252,15 +252,6 @@ mongoose.connect("mongodb+srv://aryansharma21:CheckMate123@cluster0.ufwqm.mongod
   console.log('Connected to MongoDB');
 }).catch((err) => {
   console.error('Error connecting to MongoDB:', err);
-});
-
-// Initialize GridFS
-let gfs;
-mongoose.connection.once('open', () => {
-  gfs = new mongoose.mongo.GridFSBucket(mongoose.connection.db, {
-    bucketName: 'profile_photos'
-  });
-  console.log('GridFS initialized');
 });
 
 // Routes
@@ -283,7 +274,7 @@ app.post('/api/send-test-email', async (req, res) => {
 });
 
 // Start the email scheduler
-scheduleDailyChallenges();
+// scheduleDailyChallenges();
 
 // Start the server
 app.listen(PORT, () => {
