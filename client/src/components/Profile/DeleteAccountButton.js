@@ -33,6 +33,7 @@ const DeleteAccountButton = () => {
         withCredentials: true
       });
       navigate('/home');
+      window.location.reload(); // Refresh the page after navigation
     } catch (error) {
       console.error('Error deleting account:', error);
       setIsDeleting(false);

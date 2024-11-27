@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 import { 
   Card, 
   CardContent, 
@@ -16,26 +15,20 @@ import {
   Container,
   CircularProgress,
   Alert,
-  IconButton,
   Snackbar
 } from '@mui/material';
 import { 
   EmojiEvents as TrophyIcon,
   Games as GamepadIcon,
   Timeline as TargetIcon,
-  Schedule as ClockIcon,
-  CameraAlt as CameraAltIcon,
-  DeleteForever as DeleteIcon
-
+  Schedule as ClockIcon
 } from '@mui/icons-material';
-import DeleteAccountButton from './DeleteAccountButton'; // Import the new component
+import DeleteAccountButton from './DeleteAccountButton';
 
 const Profile = ({ user }) => {
   const [gameResults, setGameResults] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [profilePhoto, setProfilePhoto] = useState(user?.profilePhoto || 'default-avatar.png');
-  const [uploading, setUploading] = useState(false);
   const [notification, setNotification] = useState({ open: false, message: '', severity: 'success' });
  
   useEffect(() => {
@@ -56,62 +49,6 @@ const Profile = ({ user }) => {
 
     fetchGameResults();
   }, []);
-
-  const handlePhotoUpload = async (event) => {
-    const file = event.target.files[0];
-    if (!file) return;
-
-    if (file.size > 5 * 1024 * 1024) {
-      setNotification({
-        open: true,
-        message: 'File size too large. Please choose an image under 5MB.',
-        severity: 'error'
-      });
-      return;
-    }
-    
-    if (!file.type.startsWith('image/')) {
-      setNotification({
-        open: true,
-        message: 'Please select an image file.',
-        severity: 'error'
-      });
-      return;
-    }
-
-    const formData = new FormData();
-    formData.append('profilePhoto', file);
-
-    setUploading(true);
-    try {
-      const response = await axios.post(
-        'http://localhost:5000/api/update-profile-photo', 
-        formData,
-        {
-          withCredentials: true,
-          headers: {
-            'Content-Type': 'multipart/form-data',
-          },
-        }
-      );
-
-      setProfilePhoto(response.data.profilePhoto);
-      setNotification({
-        open: true,
-        message: 'Profile photo updated successfully!',
-        severity: 'success'
-      });
-    } catch (error) {
-      console.error('Error uploading photo:', error);
-      setNotification({
-        open: true,
-        message: 'Failed to update profile photo. Please try again.',
-        severity: 'error'
-      });
-    } finally {
-      setUploading(false);
-    }
-  };
 
   const handleCloseNotification = (event, reason) => {
     if (reason === 'clickaway') {
@@ -156,12 +93,10 @@ const Profile = ({ user }) => {
               }}
             >
               <CardContent sx={{ textAlign: 'center', py: 4 }}>
-                                {/* Add Delete Account Button */}
-                 
                 <Box sx={{ position: 'relative', display: 'inline-block', mb: 3 }}>
                   <Box 
                     component="img"
-                    src={`http://localhost:5000/uploads/profiles/${profilePhoto}`}
+                    src={require("D:/testing1/AI-Chess/client/src/components/Assets/avatar.png")}
                     alt="Profile"
                     sx={{
                       width: 128,
@@ -176,46 +111,6 @@ const Profile = ({ user }) => {
                       }
                     }}
                   />
-                  <Box
-                    sx={{
-                      position: 'absolute',
-                      bottom: -20,
-                      left: '50%',
-                      transform: 'translateX(-50%)',
-                      zIndex: 1
-                    }}
-                  >
-                    <input
-                      accept="image/*"
-                      style={{ display: 'none' }}
-                      id="photo-upload"
-                      type="file"
-                      onChange={handlePhotoUpload}
-                      disabled={uploading}
-                    />
-                    <label htmlFor="photo-upload">
-                      <IconButton
-                        component="span"
-                        sx={{
-                          backgroundColor: 'primary.main',
-                          color: 'white',
-                          '&:hover': {
-                            backgroundColor: 'primary.dark',
-                          },
-                          '&.Mui-disabled': {
-                            backgroundColor: 'rgba(0, 0, 0, 0.12)',
-                          }
-                        }}
-                        disabled={uploading}
-                      >
-                        {uploading ? (
-                          <CircularProgress size={24} color="inherit" />
-                        ) : (
-                          <CameraAltIcon />
-                        )}
-                      </IconButton>
-                    </label>
-                  </Box>
                 </Box>
                 <Typography 
                   variant="h4" 
@@ -227,8 +122,8 @@ const Profile = ({ user }) => {
                   }}
                 >
                   <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-                  <DeleteAccountButton />
-                </Box>
+                    <DeleteAccountButton />
+                  </Box>
                   {user.name}
                 </Typography>
                 <Typography 
@@ -409,7 +304,6 @@ const Profile = ({ user }) => {
             </CardContent>
           </Card>
         </Box>
-        
       </Container>
       <Snackbar
         open={notification.open}
