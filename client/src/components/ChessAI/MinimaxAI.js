@@ -1,3 +1,6 @@
+// Remove the unused import
+// import { Chess } from 'chess.js';
+
 const pieceValues = {
     p: 100,
     n: 320,
