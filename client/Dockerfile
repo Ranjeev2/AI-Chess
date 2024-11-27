@@ -19,8 +19,8 @@ RUN npm run build
 # Install 'serve' to serve the React app
 RUN npm install -g serve
 
-# Expose port 5000 (React app will be served on this port)
-EXPOSE 5000
+# Expose port 3000 (React app will be served on this port now)
+EXPOSE 3000
 
 # Command to serve the built React app
-CMD ["serve", "-s", "build", "-l", "5000"]
+CMD ["serve", "-s", "build", "-l", "3000"]
