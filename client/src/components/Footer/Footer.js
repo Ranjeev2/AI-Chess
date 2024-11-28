@@ -81,11 +81,11 @@ const Footer = () => {
               </p>
               <p className="flex items-center text-sm">
                 <Phone className="w-4 h-4 mr-2" />
-                +1 (555) 123-4567
+                +91 - 9960765259
               </p>
               <p className="flex items-center text-sm">
                 <MapPin className="w-4 h-4 mr-2" />
-                123 Chess Street, AI City, 12345
+                NIIT UNIVERSITY, NEEMRANA, Rajasthan, India
               </p>
             </div>
           </div>

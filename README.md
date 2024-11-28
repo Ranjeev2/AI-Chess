@@ -17,6 +17,7 @@
 - **Minimax Algorithm with Alpha-Beta Pruning**: The core AI logic for decision-making.
 - **Docker**: Used to containerize the application for consistent environments.
 - **Jenkins**: For Continuous Integration (CI) and Continuous Deployment (CD).
+- **Jenkins**: Changess.
 
 ## Humans behind this project
 - [Raja Pandey](https://github.com/Rpandey010)
