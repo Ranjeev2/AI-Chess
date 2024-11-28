@@ -58,7 +58,7 @@ const Profile = ({ user }) => {
   };
 
   const totalGames = gameResults.length;
-  const wins = gameResults.filter(game => game.winner.toLowerCase() === 'win').length;
+  const wins = gameResults.filter(game => game.winner === 'User').length;
   const winRate = totalGames > 0 ? Math.round((wins / totalGames) * 100) : 0;
 
   const stats = [
