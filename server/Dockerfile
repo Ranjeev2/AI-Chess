@@ -1,37 +1,19 @@
-# # Dockerfile for Server
-# FROM node:14
+# Use the official Node.js image as the base image
+FROM node:18
 
-# # Set the working directory
-# WORKDIR /app
-
-# # Copy package.json and package-lock.json
-# COPY package*.json ./
-
-# # Install dependencies
-# RUN npm install
-
-# # Copy the rest of the application files
-# COPY . .
-
-# # Expose the port (change if necessary)
-# EXPOSE 5000
-
-# # Command to run the application
-# CMD ["npm", "start"]
-
-# Server Dockerfile
-FROM node:16
-
+# Set the working directory in the container
 WORKDIR /app
 
-# Install dependencies
+# Copy package.json and package-lock.json
 COPY package*.json ./
+
+# Install dependencies
 RUN npm install
 
-# Copy the rest of the application code
+# Copy the rest of the server application code
 COPY . .
 
-# Expose port 5000 for the server
+# Expose port 5000 for the backend server
 EXPOSE 5000
 
 # Start the server using `npm run dev`
