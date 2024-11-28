@@ -1,7 +1,7 @@
 # CheckMate.ai
 
 ## Overview
-**Chess-AI** is  simple chess engine built in JavaScript using the Minimax algorithm with Alpha-Beta pruning. This project aims to provide users with a chess-playing AI that can be customized for different levels of difficulty. It uses external libraries like **chessboard.js** for the chessboard UI and **chess.js** for game mechanics.
+**Chess-AI** is a simple chess engine built in JavaScript using the Minimax algorithm with Alpha-Beta pruning. This project aims to provide users with a chess-playing AI that can be customized for different levels of difficulty. It uses external libraries like **chessboard.js** for the chessboard UI and **chess.js** for game mechanics.
 
 ## Features
 - Play against the AI as white, with the AI controlling the black pieces.
