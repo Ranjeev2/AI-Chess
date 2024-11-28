@@ -8,7 +8,7 @@
 - Adjustable AI difficulty via search depth customization (Minimax depth).
 - Option to watch the AI play against itself.
 - Real-time game evaluation displayed through an advantage bar.
-- Interactive UI with drag-and-drop functionality for moving pieces.
+- Interactive UI with drag-and-drop functionality for moving piec
 
 ## Technologies Used
 - **JavaScript**: Core programming language for the AI logic.
